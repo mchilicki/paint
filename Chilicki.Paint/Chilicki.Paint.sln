@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.UserInterface", "Chilicki.Paint.UserInterface\Chilicki.Paint.UserInterface.csproj", "{C5CEA3CB-0868-4EFD-8E2B-15D7C1BE9A83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.Domain", "Chilicki.Paint.Domain\Chilicki.Paint.Domain.csproj", "{DCA256D7-140A-4A85-80AC-67E3C07B9D2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.Application", "Chilicki.Paint.Application\Chilicki.Paint.Application.csproj", "{53C360D3-A8FA-44AA-802C-5083C3F5A5B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.Infrastructure", "Chilicki.Paint.Infrastructure\Chilicki.Paint.Infrastructure.csproj", "{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "B. Infrastructure", "B. Infrastructure", "{67E4DB90-2785-4C91-A63B-A689338E13CB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "A. Common", "A. Common", "{3CA115CE-6399-4AF5-B7D0-4FB2E482940F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "C. Domain", "C. Domain", "{BF3DD0B7-E476-4B24-AC2C-7037B5754B8D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "D. Application", "D. Application", "{9A778EAA-A2D2-45BF-BAFD-62EEEE4A611D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "E. UserInterface", "E. UserInterface", "{9DF206DA-7D91-4D0E-BC1E-82F101771C6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.Common", "Chilicki.Paint.Common\Chilicki.Paint.Common.csproj", "{A5019685-EE45-46AA-8268-5728EB1BEE55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5CEA3CB-0868-4EFD-8E2B-15D7C1BE9A83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5CEA3CB-0868-4EFD-8E2B-15D7C1BE9A83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5CEA3CB-0868-4EFD-8E2B-15D7C1BE9A83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5CEA3CB-0868-4EFD-8E2B-15D7C1BE9A83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCA256D7-140A-4A85-80AC-67E3C07B9D2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCA256D7-140A-4A85-80AC-67E3C07B9D2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCA256D7-140A-4A85-80AC-67E3C07B9D2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCA256D7-140A-4A85-80AC-67E3C07B9D2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53C360D3-A8FA-44AA-802C-5083C3F5A5B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53C360D3-A8FA-44AA-802C-5083C3F5A5B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53C360D3-A8FA-44AA-802C-5083C3F5A5B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53C360D3-A8FA-44AA-802C-5083C3F5A5B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5019685-EE45-46AA-8268-5728EB1BEE55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5019685-EE45-46AA-8268-5728EB1BEE55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5019685-EE45-46AA-8268-5728EB1BEE55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5019685-EE45-46AA-8268-5728EB1BEE55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C5CEA3CB-0868-4EFD-8E2B-15D7C1BE9A83} = {9DF206DA-7D91-4D0E-BC1E-82F101771C6B}
+		{DCA256D7-140A-4A85-80AC-67E3C07B9D2E} = {BF3DD0B7-E476-4B24-AC2C-7037B5754B8D}
+		{53C360D3-A8FA-44AA-802C-5083C3F5A5B4} = {9A778EAA-A2D2-45BF-BAFD-62EEEE4A611D}
+		{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E} = {67E4DB90-2785-4C91-A63B-A689338E13CB}
+		{A5019685-EE45-46AA-8268-5728EB1BEE55} = {3CA115CE-6399-4AF5-B7D0-4FB2E482940F}
+	EndGlobalSection
+EndGlobal
