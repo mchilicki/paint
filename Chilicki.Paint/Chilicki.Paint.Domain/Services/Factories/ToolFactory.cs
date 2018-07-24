@@ -3,9 +3,9 @@ using Chilicki.Paint.Domain.Services.PaintingTools;
 
 namespace Chilicki.Paint.Domain.Services.Factories
 {
-    public class ToolFactory
+    public class ToolFactory : IToolFactory
     {
-        public PainterTool Create(ToolType toolType)
+        public IPainterTool Create(ToolType toolType)
         {
             switch (toolType)
             {
@@ -13,12 +13,12 @@ namespace Chilicki.Paint.Domain.Services.Factories
                     return new CircleTool();
                 case ToolType.Line:
                     return new LineTool();
-                case ToolType.Pencil:
-                    return new PencilTool();
                 case ToolType.Rectangle:
                     return new RectangleTool();
                 case ToolType.Rubber:
                     return new RubberTool();
+                case ToolType.Pencil:
+                    return new PencilTool();
                 default:
                     return new EmptyTool();
             }

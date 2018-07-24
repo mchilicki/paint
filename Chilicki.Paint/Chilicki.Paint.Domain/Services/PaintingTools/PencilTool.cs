@@ -1,7 +1,14 @@
-﻿namespace Chilicki.Paint.Domain.Services.PaintingTools
-{
-    public class PencilTool : PainterTool
-    {
+﻿using System;
+using System.Collections.Generic;
+using Chilicki.Paint.Domain.ValueObjects;
 
+namespace Chilicki.Paint.Domain.Services.PaintingTools
+{
+    public class PencilTool : IPainterTool
+    {
+        public List<DrawingItem> Draw(List<DrawingItem> drawingList, Point drawingStartPoint, Point drawingEndPoint)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
