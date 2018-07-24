@@ -5,6 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chilicki.Paint.UserInterface"
         xmlns:properties="clr-namespace:Chilicki.Paint.UserInterface.Properties"
+        xmlns:enums="clr-namespace:Chilicki.Paint.Domain.Enums;assembly=Chilicki.Paint.Domain"
+        xmlns:base="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Base"
+        xmlns:commands="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Commands"
+        xmlns:behaviours="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Behaviours"
+        xmlns:domainObjects="clr-namespace:Chilicki.Paint.Domain.ValueObjects;assembly=Chilicki.Paint.Domain"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:si="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
         mc:Ignorable="d"
         Title="Paint by Marcin Chilicki"
         Width="900"
@@ -12,30 +19,78 @@
         MaxWidth="900"
         MaxHeight="600"
         Height="600"
-        MinHeight="600"
->
-    <Grid Name="MainGrid">
+        MinHeight="600">
+    <Grid Name="MainGrid" Background="LightGray">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-        <Grid Name="LeftGrid" Grid.Column="0">
+        <Grid Name="LeftMenuGrid" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.9*"/>
-                <RowDefinition Height="0.9*" />
-                <RowDefinition Height="0.9*" />
-                <RowDefinition Height="0.9*" />
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="1.3*" />
-                <RowDefinition Height="1.3*" />
-                <RowDefinition Height="1.3*" />
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="0.5*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="4*" />
             </Grid.RowDefinitions>
-            
-
+            <Button Content="Undo" Grid.Row="0" Command="{Binding Undo}" Style="{StaticResource ButtonStyle}"/>
+            <RadioButton Content="Pencil" Grid.Row="1" Command="{Binding ChangeTool}" 
+                          CommandParameter="{x:Static enums:ToolType.Pencil}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
+            <RadioButton Content="Line" Grid.Row="2" Command="{Binding ChangeTool}" 
+                          CommandParameter="{x:Static enums:ToolType.Line}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
+            <RadioButton Content="Circle" Grid.Row="3" Command="{Binding ChangeTool}" 
+                          CommandParameter="{x:Static enums:ToolType.Circle}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
+            <RadioButton Content="Rectangle" Grid.Row="4" Command="{Binding ChangeTool}" 
+                          CommandParameter="{x:Static enums:ToolType.Rectangle}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
+            <RadioButton Content="Rubber" Grid.Row="4" Command="{Binding ChangeTool}" 
+                          CommandParameter="{x:Static enums:ToolType.Rubber}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
+            <Label Content="Thickness" Grid.Row="5" Style="{StaticResource LabelStyle}"/>
+            <ComboBox SelectedIndex="{Binding CurrentThickness}" Grid.Row="5" Style="{StaticResource ComboBoxStyle}" 
+                      Margin="122,11.2,15,5" Width="Auto">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>2</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem>4</ComboBoxItem>
+            </ComboBox>
         </Grid>
-        
-        
+        <Grid Name="RightCanvasGrid" Grid.Column="1">
+            <ItemsControl ItemsSource="{Binding DrawingItems}"                              >
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type domainObjects:PointItem}"/>
+                    <DataTemplate DataType="{x:Type domainObjects:EllipseItem}">
+                        <Ellipse Stroke="Red" Fill="White" 
+                                 Width="{Binding EllipseWidth}"
+                                 Height="{Binding EllipseHeight}"
+                                 />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type domainObjects:LineItem}"/>
+                    <DataTemplate DataType="{x:Type domainObjects:RectangleItem}"/>
+                </ItemsControl.Resources>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Background="White">
+                            <i:Interaction.Behaviors>
+                                <behaviours:MouseBehaviour MouseX="{Binding CurrentMousePositionX, Mode=OneWayToSource}" 
+                                                           MouseY="{Binding CurrentMousePositionY, Mode=OneWayToSource}" />
+                                <behaviours:EventToCommandBehavior Command="{Binding StartDrawing}" Event="MouseDown" 
+                                                                   PassArguments="True" />
+                                <behaviours:EventToCommandBehavior Command="{Binding EndDrawing}" Event="MouseUp" 
+                                                                   PassArguments="True" />
+                            </i:Interaction.Behaviors>
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
+        </Grid>
     </Grid>
 </Window>
