@@ -4,12 +4,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.UserInterface", "Chilicki.Paint.UserInterface\Chilicki.Paint.UserInterface.csproj", "{C5CEA3CB-0868-4EFD-8E2B-15D7C1BE9A83}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5019685-EE45-46AA-8268-5728EB1BEE55} = {A5019685-EE45-46AA-8268-5728EB1BEE55}
+		{53C360D3-A8FA-44AA-802C-5083C3F5A5B4} = {53C360D3-A8FA-44AA-802C-5083C3F5A5B4}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.Domain", "Chilicki.Paint.Domain\Chilicki.Paint.Domain.csproj", "{DCA256D7-140A-4A85-80AC-67E3C07B9D2E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5019685-EE45-46AA-8268-5728EB1BEE55} = {A5019685-EE45-46AA-8268-5728EB1BEE55}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.Application", "Chilicki.Paint.Application\Chilicki.Paint.Application.csproj", "{53C360D3-A8FA-44AA-802C-5083C3F5A5B4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E} = {2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E}
+		{A5019685-EE45-46AA-8268-5728EB1BEE55} = {A5019685-EE45-46AA-8268-5728EB1BEE55}
+		{DCA256D7-140A-4A85-80AC-67E3C07B9D2E} = {DCA256D7-140A-4A85-80AC-67E3C07B9D2E}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chilicki.Paint.Infrastructure", "Chilicki.Paint.Infrastructure\Chilicki.Paint.Infrastructure.csproj", "{2B225A78-4FCB-4127-BF1F-B8F2F5AEA32E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A5019685-EE45-46AA-8268-5728EB1BEE55} = {A5019685-EE45-46AA-8268-5728EB1BEE55}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "B. Infrastructure", "B. Infrastructure", "{67E4DB90-2785-4C91-A63B-A689338E13CB}"
 EndProject
