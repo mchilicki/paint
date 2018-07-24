@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Input;
 
-namespace Chilicki.Paint.UserInterface.ViewModel.Base
+namespace Chilicki.Paint.UserInterface.ViewModel.Behaviours
 {
     // https://stackoverflow.com/questions/30047415/how-do-i-get-mouse-positions-in-my-view-model
     public class MouseBehaviour : System.Windows.Interactivity.Behavior<Panel>

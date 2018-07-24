@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Chilicki.Paint.UserInterface.ViewModel.Base
+namespace Chilicki.Paint.UserInterface.ViewModel.Commands
 {
     public class ActionCommand<T> : ICommand
     {
@@ -11,7 +11,7 @@ namespace Chilicki.Paint.UserInterface.ViewModel.Base
         public ActionCommand(Action<T> action)
         {
             _action = action;
-        }
+        }  
 
         public bool CanExecute(object parameter) { return true; }
 

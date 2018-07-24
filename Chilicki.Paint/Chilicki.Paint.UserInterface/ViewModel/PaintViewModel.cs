@@ -1,24 +1,33 @@
-﻿using Chilicki.Paint.Domain.ValueObjects;
+﻿using Chilicki.Paint.Application.Managers;
+using Chilicki.Paint.Domain.ValueObjects;
 using Chilicki.Paint.UserInterface.ViewModel.Base;
+using Chilicki.Paint.UserInterface.ViewModel.Commands;
 using System.Collections.ObjectModel;
-
 using System.Windows.Input;
 
 namespace Chilicki.Paint.UserInterface.ViewModel
 {
     class PaintViewModel : BaseViewModel
     {
+        private PaintManager _paintManager;
+
         private Point _drawingStartPoint;
         private Point _drawingEndPoint;
 
-        private ObservableCollection<DrawingItem> _drawingItems;
+        public PaintViewModel(PaintManager paintManager)
+        {
+            _paintManager = paintManager;
+        }
+
+        private ObservableCollection<DrawingItem> _drawingItems 
+            = new ObservableCollection<DrawingItem>();
         public ObservableCollection<DrawingItem> DrawingItems
         {
             get { return _drawingItems; }
             set
             {
                 _drawingItems = value;
-                NotifyPropertyChanged(nameof(DrawingItem));
+                NotifyPropertyChanged(nameof(DrawingItems));
             }
         }
 
@@ -28,8 +37,6 @@ namespace Chilicki.Paint.UserInterface.ViewModel
             get { return _currentMousePositionX; }
             set
             {
-                if (value.Equals(_currentMousePositionX))
-                    return;
                 _currentMousePositionX = value;
                 NotifyPropertyChanged(nameof(CurrentMousePositionX));
             }
@@ -41,12 +48,21 @@ namespace Chilicki.Paint.UserInterface.ViewModel
             get { return _currentMousePositionY; }
             set
             {
-                if (value.Equals(_currentMousePositionY))
-                    return;
                 _currentMousePositionY = value;
                 NotifyPropertyChanged(nameof(CurrentMousePositionY));
             }
-        }        
+        }
+
+        private double _currentThickness = 1;
+        public double CurrentThickness
+        {
+            get { return _currentThickness; }
+            set
+            {
+                _currentThickness = value;
+                NotifyPropertyChanged(nameof(CurrentThickness));
+            }
+        }
 
         private ActionCommand<MouseButtonEventArgs> _startDrawing;
         public ActionCommand<MouseButtonEventArgs> StartDrawing
@@ -74,9 +90,40 @@ namespace Chilicki.Paint.UserInterface.ViewModel
                     _endDrawing = new ActionCommand<MouseButtonEventArgs>((mouseArguments) =>
                     {
                         _drawingEndPoint = new Point(CurrentMousePositionX, CurrentMousePositionY);
+                        System.Windows.MessageBox.Show(_drawingStartPoint.X.ToString() + " " + _drawingStartPoint.Y.ToString() + "SS " + _drawingEndPoint.X.ToString() + " " + _drawingEndPoint.Y.ToString());
                     });
                 }
                 return _endDrawing;
+            }
+        }
+
+        private ICommand _undo;
+        public ICommand Undo
+        {
+            get
+            {
+                if (_undo == null)
+                {
+                    _undo = new NoParameterCommand(() =>
+                    {
+                    });
+                }
+                return _undo;
+            }
+        }
+
+        private ICommand _changeTool;
+        public ICommand ChangeTool
+        {
+            get
+            {
+                if (_changeTool == null)
+                {
+                    _changeTool = new RelayCommand((toolType) =>
+                    {
+                    });
+                }
+                return _changeTool;
             }
         }
     }

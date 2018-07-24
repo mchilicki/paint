@@ -1,14 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interactivity;
 
-namespace Chilicki.Paint.UserInterface.ViewModel.Base
+namespace Chilicki.Paint.UserInterface.ViewModel.Behaviours
 {
     public class EventToCommandBehavior : Behavior<FrameworkElement>
     {

@@ -45,7 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Managers\FileManager.cs" />
-    <Compile Include="Managers\PaintingManager.cs" />
+    <Compile Include="Managers\PaintManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

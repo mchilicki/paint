@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace Chilicki.Paint.UserInterface.ViewModel.Base
+namespace Chilicki.Paint.UserInterface.ViewModel.Commands
 {
     public class RelayCommand : ICommand
     {

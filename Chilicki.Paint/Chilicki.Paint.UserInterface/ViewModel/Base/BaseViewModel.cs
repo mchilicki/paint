@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace Chilicki.Paint.UserInterface.ViewModel.Base
 {
