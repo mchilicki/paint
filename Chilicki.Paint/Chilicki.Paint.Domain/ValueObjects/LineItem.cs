@@ -1,6 +1,6 @@
 ﻿namespace Chilicki.Paint.Domain.ValueObjects
 {
-    class LineItem
+    public class LineItem
     {
         public double StartPointX { get; set; }
         public double StartPointY { get; set; }

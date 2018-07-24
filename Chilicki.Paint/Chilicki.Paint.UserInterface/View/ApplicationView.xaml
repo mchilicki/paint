@@ -5,6 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Chilicki.Paint.UserInterface"
         xmlns:properties="clr-namespace:Chilicki.Paint.UserInterface.Properties"
+        xmlns:base="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Base"
+        xmlns:domainObjects="clr-namespace:Chilicki.Paint.Domain.ValueObjects;assembly=Chilicki.Paint.Domain"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        xmlns:si="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
         mc:Ignorable="d"
         Title="Paint by Marcin Chilicki"
         Width="900"
@@ -12,14 +16,13 @@
         MaxWidth="900"
         MaxHeight="600"
         Height="600"
-        MinHeight="600"
->
+        MinHeight="600">
     <Grid Name="MainGrid">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
-        <Grid Name="LeftGrid" Grid.Column="0">
+        <Grid Name="LeftMenuGrid" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="0.9*"/>
                 <RowDefinition Height="0.9*" />
@@ -31,9 +34,40 @@
                 <RowDefinition Height="1.3*" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="0.5*" />
-            </Grid.RowDefinitions>
-            
-
+            </Grid.RowDefinitions>   
+        </Grid>
+        <Grid Name="RightCanvasGrid" Grid.Column="1">
+            <ItemsControl ItemsSource="{Binding DrawingItems}"
+                              >
+                <ItemsControl.Resources>
+                    <DataTemplate DataType="{x:Type domainObjects:PointItem}"/>
+                    <DataTemplate DataType="{x:Type domainObjects:EllipseItem}">
+                        <Ellipse Stroke="Red" Fill="White" 
+                                 Width="{Binding EllipseWidth}"
+                                 Height="{Binding EllipseHeight}"
+                                 />
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type domainObjects:LineItem}"/>
+                    <DataTemplate DataType="{x:Type domainObjects:RectangleItem}"/>
+                </ItemsControl.Resources>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <Canvas Background="White">
+                            <i:Interaction.Behaviors>
+                                <base:MouseBehaviour MouseX="{Binding CurrentMousePositionX, Mode=OneWayToSource}" MouseY="{Binding CurrentMousePositionY, Mode=OneWayToSource}" />
+                                <base:EventToCommandBehavior Command="{Binding StartDrawing}" Event="MouseDown" PassArguments="True" />
+                                <base:EventToCommandBehavior Command="{Binding EndDrawing}" Event="MouseUp" PassArguments="True" />
+                            </i:Interaction.Behaviors>
+                        </Canvas>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
+                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+            </ItemsControl>
         </Grid>
         
         

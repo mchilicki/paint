@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -40,7 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Managers\FileManager.cs" />
+    <Compile Include="Managers\PaintingManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Chilicki.Paint.Common\Chilicki.Paint.Common.csproj">
+      <Project>{a5019685-ee45-46aa-8268-5728eb1bee55}</Project>
+      <Name>Chilicki.Paint.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Chilicki.Paint.Domain\Chilicki.Paint.Domain.csproj">
+      <Project>{dca256d7-140a-4a85-80ac-67e3c07b9d2e}</Project>
+      <Name>Chilicki.Paint.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Chilicki.Paint.Infrastructure\Chilicki.Paint.Infrastructure.csproj">
+      <Project>{2b225a78-4fcb-4127-bf1f-b8f2f5aea32e}</Project>
+      <Name>Chilicki.Paint.Infrastructure</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
