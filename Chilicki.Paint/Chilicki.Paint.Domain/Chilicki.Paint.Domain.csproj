@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\ToolDrawingType.cs" />
+    <Compile Include="Enums\DrawingType.cs" />
     <Compile Include="Enums\ToolType.cs" />
     <Compile Include="Services\Factories\ToolFactory.cs" />
     <Compile Include="Services\Factories\IToolFactory.cs" />
@@ -62,8 +62,9 @@
     <Compile Include="ValueObjects\DrawingItems\CircleItem.cs" />
     <Compile Include="ValueObjects\DrawingItems\DrawingItem.cs" />
     <Compile Include="ValueObjects\DrawingItems\LineItem.cs" />
+    <Compile Include="ValueObjects\DrawingItems\RubberItem.cs" />
     <Compile Include="ValueObjects\Point.cs" />
-    <Compile Include="ValueObjects\DrawingItems\PointItem.cs" />
+    <Compile Include="ValueObjects\DrawingItems\PencilItem.cs" />
     <Compile Include="ValueObjects\DrawingItems\RectangleItem.cs" />
   </ItemGroup>
   <ItemGroup>

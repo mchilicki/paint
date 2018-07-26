@@ -2,12 +2,18 @@
 using System.Collections.Generic;
 using Chilicki.Paint.Domain.ValueObjects;
 using Chilicki.Paint.Domain.ValueObjects.DrawingItems;
+using Chilicki.Paint.Common.Extensions.Lists;
 
 namespace Chilicki.Paint.Domain.Services.PaintingTools
 {
     public class CircleTool : IPainterTool
     {
-        public List<DrawingItem> Draw(List<DrawingItem> drawingList, Point drawingStartPoint, Point drawingEndPoint)
+        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, IList<Point> drawingPoints)
+        {
+            return Draw(drawingList, drawingPoints.First(), drawingPoints.Last());
+        }
+
+        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, Point drawingStartPoint, Point drawingEndPoint)
         {
             double startingLocationX, startingLocationY;
             double circleHeight = Math.Abs(drawingStartPoint.Y - drawingEndPoint.Y);

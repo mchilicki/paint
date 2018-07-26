@@ -1,6 +1,6 @@
 ﻿namespace Chilicki.Paint.Domain.Enums
 {
-    public enum ToolDrawingType
+    public enum DrawingType
     {
         ByPoint,
         Figure,

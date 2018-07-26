@@ -45,7 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\Lists\ListExtensions.cs" />
+    <Compile Include="Extensions\Lists\IListExtensions.cs" />
     <Compile Include="Extensions\Lists\ObservableCollectionExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

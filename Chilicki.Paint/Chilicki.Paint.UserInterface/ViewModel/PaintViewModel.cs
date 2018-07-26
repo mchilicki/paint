@@ -7,6 +7,7 @@ using Chilicki.Paint.Common.Extensions.Lists;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Chilicki.Paint.Domain.Enums;
+using System.Collections.Generic;
 
 namespace Chilicki.Paint.UserInterface.ViewModel
 {
@@ -14,9 +15,9 @@ namespace Chilicki.Paint.UserInterface.ViewModel
     {
         private PaintManager _paintManager;
         private ToolType _currentToolType;
+        private IList<Point> _drawingPoints;
 
-        private Point _drawingStartPoint;
-        private Point _drawingEndPoint;
+        private bool _isUserDrawing = false;
 
         public PaintViewModel(PaintManager paintManager)
         {
@@ -78,10 +79,29 @@ namespace Chilicki.Paint.UserInterface.ViewModel
                 {
                     _startDrawing = new ActionCommand<MouseButtonEventArgs>((mouseArguments) =>
                     {
-                        _drawingStartPoint = new Point(CurrentMousePositionX, CurrentMousePositionY);
+                        _isUserDrawing = true;
+                        _drawingPoints = new List<Point>();
+                        _drawingPoints.Add(new Point(CurrentMousePositionX, CurrentMousePositionY));
                     });
                 }
                 return _startDrawing;
+            }
+        }
+
+        private ActionCommand<MouseButtonEventArgs> _continueDrawing;
+        public ActionCommand<MouseButtonEventArgs> ContinueDrawing
+        {
+            get
+            {
+                if (_continueDrawing == null)
+                {
+                    _continueDrawing = new ActionCommand<MouseButtonEventArgs>((mouseArguments) =>
+                    {
+                        if (_drawingPoints != null && _isUserDrawing)
+                            _drawingPoints.Add(new Point(CurrentMousePositionX, CurrentMousePositionY));
+                    });
+                }
+                return _continueDrawing;
             }
         }
 
@@ -94,8 +114,13 @@ namespace Chilicki.Paint.UserInterface.ViewModel
                 {
                     _endDrawing = new ActionCommand<MouseButtonEventArgs>((mouseArguments) =>
                     {
-                        _drawingEndPoint = new Point(CurrentMousePositionX, CurrentMousePositionY);
-                        DrawingItems = _paintManager.Draw(_drawingItems.ToList(), _currentToolType, _drawingStartPoint, _drawingEndPoint).ToObservableCollection();
+                        if (_drawingPoints != null && _isUserDrawing)
+                        {
+                            _drawingPoints.Add(new Point(CurrentMousePositionX, CurrentMousePositionY));
+                            DrawingItems = _paintManager.Draw(_drawingItems.ToList(), _currentToolType,
+                                _drawingPoints).ToObservableCollection();
+                            _isUserDrawing = false;
+                        }                        
                     });
                 }
                 return _endDrawing;

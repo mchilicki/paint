@@ -16,11 +16,11 @@ namespace Chilicki.Paint.Application.Managers
             _toolFactory = toolFactory;
         }
 
-        public List<DrawingItem> Draw(List<DrawingItem> drawingList, ToolType toolType, 
-            Point drawingStartPoint, Point drawingEndPoint)
+        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, ToolType toolType, 
+            IList<Point> drawingPoints)
         {
-            IPainterTool painterTool =  _toolFactory.Create(toolType);
-            return painterTool.Draw(drawingList, drawingStartPoint, drawingEndPoint);
+            IPainterTool painterTool = _toolFactory.Create(toolType);
+            return painterTool.Draw(drawingList, drawingPoints);        
         }
     }
 }

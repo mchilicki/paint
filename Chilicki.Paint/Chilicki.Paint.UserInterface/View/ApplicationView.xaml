@@ -78,6 +78,18 @@
                                    Height="{Binding Height}"
                                    Margin="{Binding Margin}"/>
                     </DataTemplate>
+                    <DataTemplate DataType="{x:Type drawingItems:RubberItem}">
+                        <Rectangle Stroke="White" Fill="White"
+                                   Width="{Binding Width}"
+                                   Height="{Binding Height}"
+                                   Margin="{Binding Margin}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type drawingItems:PencilItem}">
+                        <Rectangle Stroke="Red" Fill="Red"
+                                   Width="{Binding Width}"
+                                   Height="{Binding Height}"
+                                   Margin="{Binding Margin}"/>
+                    </DataTemplate>
                 </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -86,9 +98,13 @@
                                 <behaviours:MouseBehaviour MouseX="{Binding CurrentMousePositionX, Mode=OneWayToSource}" 
                                                            MouseY="{Binding CurrentMousePositionY, Mode=OneWayToSource}" />
                                 <behaviours:EventToCommandBehavior Command="{Binding StartDrawing}" Event="MouseDown" 
-                                                                   PassArguments="True" />
+                                                                   PassArguments="False" />
                                 <behaviours:EventToCommandBehavior Command="{Binding EndDrawing}" Event="MouseUp" 
-                                                                   PassArguments="True" />
+                                                                   PassArguments="False" />
+                                <behaviours:EventToCommandBehavior Command="{Binding EndDrawing}" Event="MouseLeave" 
+                                                                   PassArguments="False" />
+                                <behaviours:EventToCommandBehavior Command="{Binding ContinueDrawing}" Event="MouseMove"
+                                                                   PassArguments="False" />
                             </i:Interaction.Behaviors>
                         </Canvas>
                     </ItemsPanelTemplate>

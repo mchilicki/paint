@@ -7,9 +7,20 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
 {
     public class PencilTool : IPainterTool
     {
-        public List<DrawingItem> Draw(List<DrawingItem> drawingList, Point drawingStartPoint, Point drawingEndPoint)
+        private readonly double PencilSize = 15;
+
+        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, IList<Point> drawingPoints)
         {
-            throw new NotImplementedException();
+            foreach (var point in drawingPoints)
+            {
+                drawingList.Add(new PencilItem()
+                {
+                    Height = PencilSize,
+                    Width = PencilSize,
+                    Margin = new System.Windows.Thickness(point.X, point.Y, 0, 0),
+                });
+            }
+            return drawingList;
         }
     }
 }
