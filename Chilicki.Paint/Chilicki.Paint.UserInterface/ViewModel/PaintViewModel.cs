@@ -129,7 +129,7 @@ namespace Chilicki.Paint.UserInterface.ViewModel
                         if (_drawingPoints != null && _isUserDrawing)
                         {
                             DrawingItemProperties properties = new DrawingItemProperties(
-                                _currentThickness + 1, CurrentColour);
+                                _currentThickness + 1, new SolidColorBrush(CurrentColour));
                             _drawingPoints.Add(new Point(CurrentMousePositionX, CurrentMousePositionY));
                             DrawingItems = _paintManager.Draw(_drawingItems.ToList(), _currentToolType,
                                 _drawingPoints, properties).ToObservableCollection();

@@ -56,6 +56,10 @@
                 <ComboBoxItem>2</ComboBoxItem>
                 <ComboBoxItem>3</ComboBoxItem>
                 <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>6</ComboBoxItem>
+                <ComboBoxItem>7</ComboBoxItem>
+                <ComboBoxItem>8</ComboBoxItem>
             </ComboBox>
             <Label Content="Colour" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
             <colorPicker:ColorPicker Grid.Row="7" SelectedColor="{Binding CurrentColour}" Height="30" Margin="108,9,14.4,9"/>
@@ -64,46 +68,35 @@
             <ItemsControl ItemsSource="{Binding DrawingItems}"                              >
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type drawingItems:CircleItem}">
-                        <Ellipse Stroke="{Binding Colour}" 
+                        <Ellipse Stroke="{Binding Brush}" 
                                  Fill="Transparent" 
                                  Width="{Binding Width}"
                                  Height="{Binding Height}"
                                  Margin="{Binding Margin}"
-                                 StrokeThickness="{Binding Thickness}"
-                                 />
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type drawingItems:LineItem}">
-                        <Line Stroke="{Binding Colour}" 
-                              Fill="Transparent"
-                              X1="{Binding StartPointX}" 
-                              Y1="{Binding StartPointY}"
-                              X2="{Binding EndPointX}" 
-                              Y2="{Binding EndPointY}"
-                              StrokeThickness="{Binding Thickness}"/>
+                                 StrokeThickness="{Binding Thickness}"/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type drawingItems:RectangleItem}">
-                        <Rectangle Stroke="{Binding Colour}"  
+                        <Rectangle Stroke="{Binding Brush}"  
                                    Fill="Transparent"
                                    Width="{Binding Width}"
                                    Height="{Binding Height}"
                                    Margin="{Binding Margin}"
                                    StrokeThickness="{Binding Thickness}"/>
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type drawingItems:RubberItem}">
-                        <Rectangle Stroke="{Binding Colour}"
-                                   Fill="{Binding Colour}"
-                                   Width="{Binding Width}"
-                                   Height="{Binding Height}"
-                                   Margin="{Binding Margin}"
-                                   StrokeThickness="{Binding Thickness}"/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type drawingItems:PencilItem}">
-                        <Rectangle Stroke="{Binding Colour}"  
-                                   Fill="{Binding Colour}"
-                                   Width="{Binding Width}"
-                                   Height="{Binding Height}"
-                                   Margin="{Binding Margin}"
-                                   StrokeThickness="{Binding Thickness}"/>
+                    <DataTemplate DataType="{x:Type drawingItems:LineItem}">
+                        <Line Stroke="{Binding Brush}" 
+                              Fill="Transparent"
+                              X1="{Binding StartPointX}" 
+                              Y1="{Binding StartPointY}"
+                              X2="{Binding EndPointX}" 
+                              Y2="{Binding EndPointY}"
+                              StrokeThickness="{Binding Thickness}"/>
+                    </DataTemplate>                    
+                    <DataTemplate DataType="{x:Type drawingItems:PathItem}">
+                        <Polyline Stroke="{Binding Brush}"  
+                                  Fill="Transparent"
+                                  StrokeThickness="{Binding Thickness}"
+                                  Points="{Binding Points}"/>
                     </DataTemplate>
                 </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
