@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Chilicki.Paint.Domain.Enums;
 using System.Collections.Generic;
+using System.Windows.Media;
 
 namespace Chilicki.Paint.UserInterface.ViewModel
 {
@@ -70,6 +71,17 @@ namespace Chilicki.Paint.UserInterface.ViewModel
             }
         }
 
+        private Color _currentColour = Color.FromArgb(255, 0, 0, 0);
+        public Color CurrentColour
+        {
+            get { return _currentColour; }
+            set
+            {
+                _currentColour = value;
+                NotifyPropertyChanged(nameof(CurrentColour));
+            }
+        }
+
         private ActionCommand<MouseButtonEventArgs> _startDrawing;
         public ActionCommand<MouseButtonEventArgs> StartDrawing
         {
@@ -116,9 +128,11 @@ namespace Chilicki.Paint.UserInterface.ViewModel
                     {
                         if (_drawingPoints != null && _isUserDrawing)
                         {
+                            DrawingItemProperties properties = new DrawingItemProperties(
+                                _currentThickness + 1, CurrentColour);
                             _drawingPoints.Add(new Point(CurrentMousePositionX, CurrentMousePositionY));
                             DrawingItems = _paintManager.Draw(_drawingItems.ToList(), _currentToolType,
-                                _drawingPoints).ToObservableCollection();
+                                _drawingPoints, properties).ToObservableCollection();
                             _isUserDrawing = false;
                         }                        
                     });
