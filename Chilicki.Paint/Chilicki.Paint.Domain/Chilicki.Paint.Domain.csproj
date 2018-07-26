@@ -45,10 +45,15 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\DrawingType.cs" />
+    <Compile Include="Enums\FigureType.cs" />
+    <Compile Include="Enums\PathType.cs" />
     <Compile Include="Enums\ToolType.cs" />
+    <Compile Include="Factories\FigureFactory.cs" />
+    <Compile Include="Factories\PathFactory.cs" />
     <Compile Include="Factories\ToolFactory.cs" />
     <Compile Include="Factories\IToolFactory.cs" />
     <Compile Include="Services\PaintingTools\CircleTool.cs" />
@@ -56,16 +61,15 @@
     <Compile Include="Services\PaintingTools\LineTool.cs" />
     <Compile Include="Services\PaintingTools\IPainterTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\PaintingTools\PencilTool.cs" />
+    <Compile Include="Services\PaintingTools\PathTool.cs" />
+    <Compile Include="Services\PaintingTools\FigureTool.cs" />
     <Compile Include="Services\PaintingTools\RectangleTool.cs" />
-    <Compile Include="Services\PaintingTools\RubberTool.cs" />
     <Compile Include="ValueObjects\DrawingItemProperties.cs" />
     <Compile Include="ValueObjects\DrawingItems\CircleItem.cs" />
     <Compile Include="ValueObjects\DrawingItems\DrawingItem.cs" />
     <Compile Include="ValueObjects\DrawingItems\LineItem.cs" />
-    <Compile Include="ValueObjects\DrawingItems\RubberItem.cs" />
     <Compile Include="ValueObjects\Point.cs" />
-    <Compile Include="ValueObjects\DrawingItems\PencilItem.cs" />
+    <Compile Include="ValueObjects\DrawingItems\PathItem.cs" />
     <Compile Include="ValueObjects\DrawingItems\RectangleItem.cs" />
   </ItemGroup>
   <ItemGroup>

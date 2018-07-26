@@ -6,12 +6,12 @@ namespace Chilicki.Paint.Domain.ValueObjects
     public class DrawingItemProperties
     {
         public double Thickness { get; set; }
-        public Color Colour { get; set; }
+        public Brush Brush { get; set; }
 
-        public DrawingItemProperties(double thickness, Color colour)
+        public DrawingItemProperties(double thickness, Brush brush)
         {
             Thickness = thickness;
-            Colour = colour;
+            Brush = brush;
         }
     }
 }
