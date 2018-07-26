@@ -9,7 +9,7 @@
         xmlns:base="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Base"
         xmlns:commands="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Commands"
         xmlns:behaviours="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Behaviours"
-        xmlns:domainObjects="clr-namespace:Chilicki.Paint.Domain.ValueObjects;assembly=Chilicki.Paint.Domain"
+        xmlns:drawingItems="clr-namespace:Chilicki.Paint.Domain.ValueObjects.DrawingItems;assembly=Chilicki.Paint.Domain"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:si="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
         mc:Ignorable="d"
@@ -38,7 +38,7 @@
                 <RowDefinition Height="4*" />
             </Grid.RowDefinitions>
             <Button Content="Undo" Grid.Row="0" Command="{Binding Undo}" Style="{StaticResource ButtonStyle}"/>
-            <RadioButton Content="Pencil" Grid.Row="1" Command="{Binding ChangeTool}" 
+            <RadioButton Content="Pencil" Grid.Row="1" IsChecked="True" Command="{Binding ChangeTool}" 
                           CommandParameter="{x:Static enums:ToolType.Pencil}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
             <RadioButton Content="Line" Grid.Row="2" Command="{Binding ChangeTool}" 
                           CommandParameter="{x:Static enums:ToolType.Line}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
@@ -46,10 +46,10 @@
                           CommandParameter="{x:Static enums:ToolType.Circle}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
             <RadioButton Content="Rectangle" Grid.Row="4" Command="{Binding ChangeTool}" 
                           CommandParameter="{x:Static enums:ToolType.Rectangle}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
-            <RadioButton Content="Rubber" Grid.Row="4" Command="{Binding ChangeTool}" 
+            <RadioButton Content="Rubber" Grid.Row="5" Command="{Binding ChangeTool}" 
                           CommandParameter="{x:Static enums:ToolType.Rubber}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
-            <Label Content="Thickness" Grid.Row="5" Style="{StaticResource LabelStyle}"/>
-            <ComboBox SelectedIndex="{Binding CurrentThickness}" Grid.Row="5" Style="{StaticResource ComboBoxStyle}" 
+            <Label Content="Thickness" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
+            <ComboBox SelectedIndex="{Binding CurrentThickness}" Grid.Row="6" Style="{StaticResource ComboBoxStyle}" 
                       Margin="122,11.2,15,5" Width="Auto">
                 <ComboBoxItem>1</ComboBoxItem>
                 <ComboBoxItem>2</ComboBoxItem>
@@ -60,15 +60,24 @@
         <Grid Name="RightCanvasGrid" Grid.Column="1">
             <ItemsControl ItemsSource="{Binding DrawingItems}"                              >
                 <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type domainObjects:PointItem}"/>
-                    <DataTemplate DataType="{x:Type domainObjects:EllipseItem}">
+                    <DataTemplate DataType="{x:Type drawingItems:CircleItem}">
                         <Ellipse Stroke="Red" Fill="White" 
-                                 Width="{Binding EllipseWidth}"
-                                 Height="{Binding EllipseHeight}"
+                                 Width="{Binding Width}"
+                                 Height="{Binding Height}"
+                                 Margin="{Binding Margin}"
                                  />
                     </DataTemplate>
-                    <DataTemplate DataType="{x:Type domainObjects:LineItem}"/>
-                    <DataTemplate DataType="{x:Type domainObjects:RectangleItem}"/>
+                    <DataTemplate DataType="{x:Type drawingItems:LineItem}">
+                        <Line  Stroke="Red" Fill="White"
+                              X1="{Binding StartPointX}" Y1="{Binding StartPointY}"
+                              X2="{Binding EndPointX}" Y2="{Binding EndPointY}"/>
+                    </DataTemplate>
+                    <DataTemplate DataType="{x:Type drawingItems:RectangleItem}">
+                        <Rectangle Stroke="Red" Fill="White"
+                                   Width="{Binding Width}"
+                                   Height="{Binding Height}"
+                                   Margin="{Binding Margin}"/>
+                    </DataTemplate>
                 </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>

@@ -1,5 +1,8 @@
-﻿using Chilicki.Paint.UserInterface.ViewModel;
+﻿using Chilicki.Paint.Application.Managers;
+using Chilicki.Paint.Domain.Services.Factories;
+using Chilicki.Paint.UserInterface.ViewModel;
 using Ninject;
+using Ninject.Parameters;
 using System;
 using System.Diagnostics;
 using System.Windows;

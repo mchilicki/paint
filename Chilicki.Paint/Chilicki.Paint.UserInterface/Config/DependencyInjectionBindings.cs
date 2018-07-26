@@ -14,7 +14,9 @@ namespace Chilicki.Paint.UserInterface.Config
 
             Bind<PaintManager>().ToSelf();
 
-            Bind<FileManager>().ToSelf();            
+            Bind<FileManager>().ToSelf();
+
+            Bind<ToolFactory>().ToSelf();
 
             Bind<IPainterTool>().To<CircleTool>().Named(nameof(CircleTool));
             Bind<IPainterTool>().To<EmptyTool>().Named(nameof(EmptyTool));
@@ -23,7 +25,7 @@ namespace Chilicki.Paint.UserInterface.Config
             Bind<IPainterTool>().To<RectangleTool>().Named(nameof(RectangleTool));
             Bind<IPainterTool>().To<RubberTool>().Named(nameof(RubberTool));
 
-            Bind<IToolFactory>().To<ToolFactory>();
+            
 
             // TODO Bind all image loaders and savers in infrastructure
         }
