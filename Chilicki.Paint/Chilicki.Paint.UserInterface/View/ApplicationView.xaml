@@ -12,6 +12,7 @@
         xmlns:drawingItems="clr-namespace:Chilicki.Paint.Domain.ValueObjects.DrawingItems;assembly=Chilicki.Paint.Domain"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:si="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
+        xmlns:colorPicker="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="Paint by Marcin Chilicki"
         Width="900"
@@ -50,45 +51,59 @@
                           CommandParameter="{x:Static enums:ToolType.Rubber}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
             <Label Content="Thickness" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
             <ComboBox SelectedIndex="{Binding CurrentThickness}" Grid.Row="6" Style="{StaticResource ComboBoxStyle}" 
-                      Margin="122,11.2,15,5" Width="Auto">
+                      Margin="108,11.2,15.4,6" Width="Auto">
                 <ComboBoxItem>1</ComboBoxItem>
                 <ComboBoxItem>2</ComboBoxItem>
                 <ComboBoxItem>3</ComboBoxItem>
                 <ComboBoxItem>4</ComboBoxItem>
             </ComboBox>
+            <Label Content="Colour" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
+            <colorPicker:ColorPicker Grid.Row="7" SelectedColor="{Binding CurrentColour}" Height="30" Margin="108,9,14.4,9"/>
         </Grid>
         <Grid Name="RightCanvasGrid" Grid.Column="1">
             <ItemsControl ItemsSource="{Binding DrawingItems}"                              >
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type drawingItems:CircleItem}">
-                        <Ellipse Stroke="Red" Fill="White" 
+                        <Ellipse Stroke="{Binding Colour}" 
+                                 Fill="Transparent" 
                                  Width="{Binding Width}"
                                  Height="{Binding Height}"
                                  Margin="{Binding Margin}"
+                                 StrokeThickness="{Binding Thickness}"
                                  />
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type drawingItems:LineItem}">
-                        <Line  Stroke="Red" Fill="White"
-                              X1="{Binding StartPointX}" Y1="{Binding StartPointY}"
-                              X2="{Binding EndPointX}" Y2="{Binding EndPointY}"/>
+                        <Line Stroke="{Binding Colour}" 
+                              Fill="Transparent"
+                              X1="{Binding StartPointX}" 
+                              Y1="{Binding StartPointY}"
+                              X2="{Binding EndPointX}" 
+                              Y2="{Binding EndPointY}"
+                              StrokeThickness="{Binding Thickness}"/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type drawingItems:RectangleItem}">
-                        <Rectangle Stroke="Red" Fill="White"
+                        <Rectangle Stroke="{Binding Colour}"  
+                                   Fill="Transparent"
                                    Width="{Binding Width}"
                                    Height="{Binding Height}"
-                                   Margin="{Binding Margin}"/>
+                                   Margin="{Binding Margin}"
+                                   StrokeThickness="{Binding Thickness}"/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type drawingItems:RubberItem}">
-                        <Rectangle Stroke="White" Fill="White"
+                        <Rectangle Stroke="{Binding Colour}"
+                                   Fill="{Binding Colour}"
                                    Width="{Binding Width}"
                                    Height="{Binding Height}"
-                                   Margin="{Binding Margin}"/>
+                                   Margin="{Binding Margin}"
+                                   StrokeThickness="{Binding Thickness}"/>
                     </DataTemplate>
                     <DataTemplate DataType="{x:Type drawingItems:PencilItem}">
-                        <Rectangle Stroke="Red" Fill="Red"
+                        <Rectangle Stroke="{Binding Colour}"  
+                                   Fill="{Binding Colour}"
                                    Width="{Binding Width}"
                                    Height="{Binding Height}"
-                                   Margin="{Binding Margin}"/>
+                                   Margin="{Binding Margin}"
+                                   StrokeThickness="{Binding Thickness}"/>
                     </DataTemplate>
                 </ItemsControl.Resources>
                 <ItemsControl.ItemsPanel>

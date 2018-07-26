@@ -1,7 +1,7 @@
 ﻿using Chilicki.Paint.Domain.Enums;
 using Chilicki.Paint.Domain.Services.PaintingTools;
 
-namespace Chilicki.Paint.Domain.Services.Factories
+namespace Chilicki.Paint.Domain.Factories
 {
     public class ToolFactory : IToolFactory
     {
@@ -9,12 +9,13 @@ namespace Chilicki.Paint.Domain.Services.Factories
         {
             switch (toolType)
             {
+                case ToolType.Rectangle:
+                    return new RectangleTool();
                 case ToolType.Circle:
                     return new CircleTool();
                 case ToolType.Line:
                     return new LineTool();
-                case ToolType.Rectangle:
-                    return new RectangleTool();
+                
                 case ToolType.Rubber:
                     return new RubberTool();
                 case ToolType.Pencil:

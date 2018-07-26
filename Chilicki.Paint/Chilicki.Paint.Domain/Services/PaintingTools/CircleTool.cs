@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using Chilicki.Paint.Domain.ValueObjects;
 using Chilicki.Paint.Domain.ValueObjects.DrawingItems;
 using Chilicki.Paint.Common.Extensions.Lists;
+using System.Windows.Media;
 
 namespace Chilicki.Paint.Domain.Services.PaintingTools
 {
     public class CircleTool : IPainterTool
     {
-        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, IList<Point> drawingPoints)
+        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, IList<Point> drawingPoints,
+            DrawingItemProperties properties)
         {
-            return Draw(drawingList, drawingPoints.First(), drawingPoints.Last());
+            return Draw(drawingList, drawingPoints.First(), drawingPoints.Last(), properties);
         }
 
-        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, Point drawingStartPoint, Point drawingEndPoint)
+        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, Point drawingStartPoint, Point drawingEndPoint,
+            DrawingItemProperties properties)
         {
             double startingLocationX, startingLocationY;
             double circleHeight = Math.Abs(drawingStartPoint.Y - drawingEndPoint.Y);
@@ -31,6 +34,8 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
                 Height = circleHeight,
                 Width = circleWidth,
                 Margin = new System.Windows.Thickness(startingLocationX, startingLocationY, 0, 0),
+                Thickness = properties.Thickness,
+                Colour = new SolidColorBrush(properties.Colour),
             });
             return drawingList;            
         }
