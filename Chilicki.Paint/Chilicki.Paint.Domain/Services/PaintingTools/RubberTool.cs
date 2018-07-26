@@ -16,10 +16,9 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
             {
                 drawingList.Add(new RubberItem()
                 {
-                    Height = RubberScalerSize,
-                    Width = RubberScalerSize,
+                    Height = RubberScalerSize * properties.Thickness,
+                    Width = RubberScalerSize * properties.Thickness,
                     Margin = new System.Windows.Thickness(point.X, point.Y, 0, 0),
-                    Thickness = RubberScalerSize * properties.Thickness,
                     Colour = new SolidColorBrush(Colors.White),
                 });
             }            

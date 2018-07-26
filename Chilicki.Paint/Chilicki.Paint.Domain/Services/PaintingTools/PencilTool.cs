@@ -16,11 +16,10 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
             {
                 drawingList.Add(new PencilItem()
                 {
-                    Height = PencilSize,
-                    Width = PencilSize,
+                    Height = PencilSize * properties.Thickness,
+                    Width = PencilSize * properties.Thickness,
                     Margin = new System.Windows.Thickness(point.X, point.Y, 0, 0),
                     Colour = new SolidColorBrush(properties.Colour),
-                    Thickness = properties.Thickness * PencilSize,
                 });
             }
             return drawingList;

@@ -15,8 +15,8 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
             return Draw(drawingList, drawingPoints.First(), drawingPoints.Last(), properties);
         }
 
-        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, Point drawingStartPoint, Point drawingEndPoint,
-            DrawingItemProperties properties)
+        public IList<DrawingItem> Draw(IList<DrawingItem> drawingList, Point drawingStartPoint, 
+            Point drawingEndPoint, DrawingItemProperties properties)
         {
             double startingLocationX, startingLocationY;
             double circleHeight = Math.Abs(drawingStartPoint.Y - drawingEndPoint.Y);

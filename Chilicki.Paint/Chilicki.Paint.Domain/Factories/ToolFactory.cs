@@ -9,13 +9,12 @@ namespace Chilicki.Paint.Domain.Factories
         {
             switch (toolType)
             {
-                case ToolType.Rectangle:
-                    return new RectangleTool();
                 case ToolType.Circle:
                     return new CircleTool();
                 case ToolType.Line:
                     return new LineTool();
-                
+                case ToolType.Rectangle:
+                    return new RectangleTool();
                 case ToolType.Rubber:
                     return new RubberTool();
                 case ToolType.Pencil:
