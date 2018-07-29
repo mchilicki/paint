@@ -1,17 +1,14 @@
-﻿using System.Windows;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace Chilicki.Paint.Domain.ValueObjects
 {
     public class DrawingItemProperties
     {
-        public double Thickness { get; set; }
-        public Brush Brush { get; set; }
+        public Color Color { get; set; }
 
-        public DrawingItemProperties(double thickness, Brush brush)
+        public DrawingItemProperties(Color color)
         {
-            Thickness = thickness;
-            Brush = brush;
+            Color = color;
         }
     }
 }

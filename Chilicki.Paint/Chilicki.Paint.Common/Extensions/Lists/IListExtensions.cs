@@ -1,17 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System;
 
 namespace Chilicki.Paint.Common.Extensions.Lists
 {
     public static class IListExtensions
     {
-        private static readonly string ArgumentNull = "IList is null";
-
-        public static ObservableCollection<T> ToObservableCollection<T>(this IList<T> list)
-        {
-            return new ObservableCollection<T>(list);
-        }
+        private static readonly string ArgumentNull = "IListExtensions: IList is null";
 
         public static T First<T>(this IList<T> list)
         {
