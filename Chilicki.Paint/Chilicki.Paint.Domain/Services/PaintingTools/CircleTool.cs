@@ -3,6 +3,7 @@ using Chilicki.Paint.Domain.ValueObjects;
 using Chilicki.Paint.Domain.Aggregates;
 using Chilicki.Paint.Domain.Services.PointAlgorithms;
 using Chilicki.Paint.Common.Extensions.Lists;
+using System.Windows.Media;
 
 namespace Chilicki.Paint.Domain.Services.PaintingTools
 {
@@ -15,11 +16,11 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
             Point topCenter = new Point(center.X, drawingPoints.First().Y);
             Point bottomCenter = new Point(center.X, drawingPoints.Last().Y);
             double radius = PointCalculator.GetLenght(topCenter, bottomCenter) / 2;
-            return Draw(pixels, center, radius, properties);
+            return BresenhamCircle(pixels, center, radius, properties.Color);
         }
 
-        public PixelCollection Draw(PixelCollection pixels, Point center,
-            double radius, DrawingItemProperties properties)
+        public PixelCollection BresenhamCircle(PixelCollection pixels, Point center,
+            double radius, Color colour)
         {
             double x = radius;
             double y = 0;
@@ -38,14 +39,14 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
                     x--;
                     decition -= 2 * x + 1;
                 }
-                pixels.SetPixel((int)(center.X + x), (int)(center.Y + y), properties.Color);
-                pixels.SetPixel((int)(center.X + y), (int)(center.Y + x), properties.Color);
-                pixels.SetPixel((int)(center.X - y), (int)(center.Y + x), properties.Color);
-                pixels.SetPixel((int)(center.X - x), (int)(center.Y + y), properties.Color);
-                pixels.SetPixel((int)(center.X - x), (int)(center.Y - y), properties.Color);
-                pixels.SetPixel((int)(center.X - y), (int)(center.Y - x), properties.Color);
-                pixels.SetPixel((int)(center.X + y), (int)(center.Y - x), properties.Color);
-                pixels.SetPixel((int)(center.X + x), (int)(center.Y - y), properties.Color);
+                pixels.SetPixel((int)(center.X + x), (int)(center.Y + y), colour);
+                pixels.SetPixel((int)(center.X + y), (int)(center.Y + x), colour);
+                pixels.SetPixel((int)(center.X - y), (int)(center.Y + x), colour);
+                pixels.SetPixel((int)(center.X - x), (int)(center.Y + y), colour);
+                pixels.SetPixel((int)(center.X - x), (int)(center.Y - y), colour);
+                pixels.SetPixel((int)(center.X - y), (int)(center.Y - x), colour);
+                pixels.SetPixel((int)(center.X + y), (int)(center.Y - x), colour);
+                pixels.SetPixel((int)(center.X + x), (int)(center.Y - y), colour);
             }
             return pixels;
         }

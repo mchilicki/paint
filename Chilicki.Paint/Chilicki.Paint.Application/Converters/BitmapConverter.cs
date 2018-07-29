@@ -37,7 +37,7 @@ namespace Chilicki.Paint.Application.Converters
             byte[] byteArray = new byte[bitmapSource.PixelHeight * stride];
             bitmapSource.CopyPixels(byteArray, stride, 0);
             IList<Pixel> pixelList = new List<Pixel>();
-            for (int i = 0; i < byteArray.Length; i += PixelValues)
+            for (int i = 0, globalIndex = 0; i < byteArray.Length; i += PixelValues, globalIndex++)
             {
                 pixelList.Add(new Pixel()
                 {
@@ -45,10 +45,11 @@ namespace Chilicki.Paint.Application.Converters
                     Green = byteArray[i + 1],
                     Red = byteArray[i + 2],
                     Alpha = byteArray[i + 3],
-                    IndexGlobal = i,
-                    IndexColumn = i % bitmapSource.PixelWidth,
-                    IndexRow = i % bitmapSource.PixelHeight,
+                    GlobalIndex = globalIndex,
+                    Column = globalIndex % bitmapSource.PixelWidth,
+                    Row = globalIndex / bitmapSource.PixelWidth,
                 });
+                ;
             }
             return new PixelCollection(pixelList, bitmapSource.PixelWidth, bitmapSource.PixelHeight,
                 (int)bitmapSource.DpiX, (int)bitmapSource.DpiY);

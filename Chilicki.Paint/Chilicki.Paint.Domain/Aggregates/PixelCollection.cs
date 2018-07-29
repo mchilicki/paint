@@ -57,18 +57,50 @@ namespace Chilicki.Paint.Domain.Aggregates
         private readonly string WrongColumnOrRow = "PixelCollection: Column or row too large";
         public Pixel GetPixel(int column, int row)
         {
-            if (column >= Width || row >= Height)
+            if (column >= Width || row >= Height || column < 0 || row < 0)
                 throw new ArgumentException(WrongColumnOrRow);
             return _pixels[Width * row + column];
+        }
+
+        public Pixel GetPixel(double column, double row)
+        {
+            return GetPixel((int)column, (int)row);
+        }
+
+        public Pixel GetPixel(Point point)
+        {
+            return GetPixel((int)point.X, (int)point.Y);
+        }
+
+        public Pixel GetPixelOrNull(double column, double row)
+        {
+            if (column >= Width || row >= Height || column < 0 || row < 0)
+                return null;
+            return _pixels[Width * (int) row + (int)column];
         }
 
         public void SetPixel(int column, int row, Color colour)
         {
             var pixel = GetPixel(column, row);
-            pixel.Alpha = colour.A;
-            pixel.Blue = colour.B;
-            pixel.Green = colour.G;
-            pixel.Red = colour.R;
+            if (pixel != null)
+            {
+                pixel.Alpha = colour.A;
+                pixel.Blue = colour.B;
+                pixel.Green = colour.G;
+                pixel.Red = colour.R;
+            }            
+        }
+
+        public void SetPixel(Point point, Color colour)
+        {
+            if (point != null)
+                SetPixel((int)point.X, (int)point.Y, colour);
+        }
+
+        public void SetPixel(Pixel pixel, Color colour)
+        {
+            if (pixel != null)
+                SetPixel(pixel.Column, pixel.Row, colour);
         }
     }
 }

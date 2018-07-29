@@ -54,13 +54,13 @@ namespace Chilicki.Paint.UserInterface.ViewModel
         }
         
         private int _currentBitmapHeight = DefaultBitmapHeight;
-        public int CurrentBitmapHeigth
+        public int CurrentBitmapHeight
         {
             get { return _currentBitmapHeight; }
             set
             {
                 _currentBitmapHeight = value;
-                NotifyPropertyChanged(nameof(CurrentBitmapHeigth));
+                NotifyPropertyChanged(nameof(CurrentBitmapHeight));
             }
         }
 

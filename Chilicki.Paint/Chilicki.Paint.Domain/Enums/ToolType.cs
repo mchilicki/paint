@@ -7,5 +7,6 @@
         Circle,
         Rectangle,
         Rubber,
+        Fill,
     }
 }

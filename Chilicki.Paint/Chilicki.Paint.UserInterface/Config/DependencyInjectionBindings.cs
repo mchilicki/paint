@@ -15,11 +15,7 @@ namespace Chilicki.Paint.UserInterface.Config
 
             Bind<FileManager>().ToSelf();
 
-            Bind<ToolFactory>().ToSelf();
-
-            Bind<FigureFactory>().ToSelf();
-
-            Bind<PathColorFactory>().ToSelf();         
+            Bind<ToolFactory>().ToSelf();     
 
             // TODO Bind all image loaders and savers in infrastructure
         }

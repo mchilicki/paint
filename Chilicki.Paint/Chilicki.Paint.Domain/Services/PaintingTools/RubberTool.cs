@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Chilicki.Paint.Domain.Aggregates;
 using Chilicki.Paint.Domain.ValueObjects;
 using System.Windows.Media;

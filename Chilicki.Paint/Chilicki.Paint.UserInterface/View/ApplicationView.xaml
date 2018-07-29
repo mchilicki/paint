@@ -9,7 +9,6 @@
         xmlns:base="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Base"
         xmlns:commands="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Commands"
         xmlns:behaviours="clr-namespace:Chilicki.Paint.UserInterface.ViewModel.Behaviours"
-        xmlns:drawingItems="clr-namespace:Chilicki.Paint.Domain.ValueObjects.DrawingItems;assembly=Chilicki.Paint.Domain"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         xmlns:si="clr-namespace:Microsoft.Expression.Interactivity.Core;assembly=Microsoft.Expression.Interactions"
         xmlns:colorPicker="http://schemas.xceed.com/wpf/xaml/toolkit"
@@ -21,20 +20,20 @@
         MinHeight="600">
     <Grid Name="MainGrid" Background="LightGray">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="175"/>
+            <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
         <Grid Name="LeftMenuGrid" Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Button Content="Undo" Grid.Row="0" Command="{Binding Undo}" Style="{StaticResource ButtonStyle}"/>
             <RadioButton Content="Pencil" Grid.Row="1" IsChecked="True" Command="{Binding ChangeTool}" 
@@ -47,8 +46,10 @@
                           CommandParameter="{x:Static enums:ToolType.Rectangle}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
             <RadioButton Content="Rubber" Grid.Row="5" Command="{Binding ChangeTool}" 
                           CommandParameter="{x:Static enums:ToolType.Rubber}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
-            <Label Content="Colour" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
-            <colorPicker:ColorPicker Grid.Row="6" SelectedColor="{Binding CurrentColour}" Height="30" Margin="108,9,14.4,9"/>
+            <RadioButton Content="Fill" Grid.Row="6" Command="{Binding ChangeTool}" 
+                          CommandParameter="{x:Static enums:ToolType.Fill}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
+            <Label Content="Colour" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
+            <colorPicker:ColorPicker Grid.Row="7" SelectedColor="{Binding CurrentColour}" Height="30" Margin="108,9,14.4,9"/>
         </Grid>
         <Grid Name="RightCanvasGrid" Grid.Column="1">
             <Canvas Height="{Binding CurrentBitmapHeight}" Width="{Binding CurrentBitmapWidth}"
