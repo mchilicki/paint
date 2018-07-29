@@ -49,16 +49,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aggregates\PixelCollection.cs" />
-    <Compile Include="Enums\DrawingType.cs" />
-    <Compile Include="Enums\FigureType.cs" />
-    <Compile Include="Enums\PathType.cs" />
     <Compile Include="Enums\ToolType.cs" />
-    <Compile Include="Factories\FigureFactory.cs" />
-    <Compile Include="Factories\PathFactory.cs" />
     <Compile Include="Factories\ToolFactory.cs" />
-    <Compile Include="Factories\IToolFactory.cs" />
     <Compile Include="Services\PaintingTools\CircleTool.cs" />
     <Compile Include="Services\PaintingTools\EmptyTool.cs" />
+    <Compile Include="Services\PaintingTools\FillTool.cs" />
     <Compile Include="Services\PaintingTools\LineTool.cs" />
     <Compile Include="Services\PaintingTools\IPainterTool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,13 +62,8 @@
     <Compile Include="Services\PaintingTools\RubberTool.cs" />
     <Compile Include="Services\PointAlgorithms\PointCalculator.cs" />
     <Compile Include="ValueObjects\DrawingItemProperties.cs" />
-    <Compile Include="ValueObjects\DrawingItems\CircleItem.cs" />
-    <Compile Include="ValueObjects\DrawingItems\DrawingItem.cs" />
-    <Compile Include="ValueObjects\DrawingItems\LineItem.cs" />
     <Compile Include="ValueObjects\Pixel.cs" />
     <Compile Include="ValueObjects\Point.cs" />
-    <Compile Include="ValueObjects\DrawingItems\PathItem.cs" />
-    <Compile Include="ValueObjects\DrawingItems\RectangleItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -85,6 +75,7 @@
       <Name>Chilicki.Paint.Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
