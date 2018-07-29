@@ -3,6 +3,7 @@ using Chilicki.Paint.Domain.ValueObjects;
 using Chilicki.Paint.Common.Extensions.Lists;
 using Chilicki.Paint.Domain.Aggregates;
 using System;
+using System.Windows.Media;
 
 namespace Chilicki.Paint.Domain.Services.PaintingTools
 {
@@ -11,11 +12,11 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
         public PixelCollection Draw(PixelCollection pixels, IList<Point> drawingPoints,
             DrawingItemProperties properties)
         {
-            return Draw(pixels, drawingPoints.First(), drawingPoints.Last(), properties);
+            return BresenhamLine(pixels, drawingPoints.First(), drawingPoints.Last(), properties.Color);
         }
 
-        public PixelCollection Draw(PixelCollection pixels, Point drawingStartPoint, 
-            Point drawingEndPoint, DrawingItemProperties properties)
+        public PixelCollection BresenhamLine(PixelCollection pixels, Point drawingStartPoint, 
+            Point drawingEndPoint, Color colour)
         {
             int lineWidth = (int)drawingEndPoint.X - (int)drawingStartPoint.X;
             int lineHeight = (int)drawingEndPoint.Y - (int)drawingStartPoint.Y;
@@ -35,7 +36,7 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
             int numerator = longest >> 1;
             for (int i = 0; i <= longest; i++)
             {
-                pixels.SetPixel((int)drawingStartPoint.X, (int)drawingStartPoint.Y, properties.Color);
+                pixels.SetPixel((int)drawingStartPoint.X, (int)drawingStartPoint.Y, colour);
                 numerator += shortest;
                 if (!(numerator < longest))
                 {

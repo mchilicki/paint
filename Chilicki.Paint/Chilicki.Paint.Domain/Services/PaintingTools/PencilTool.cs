@@ -18,7 +18,7 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
         {
             for (int i = 0; i < drawingPoints.Count - 1; i++)
             {
-                pixels = _lineTool.Draw(pixels, drawingPoints[i], drawingPoints[i + 1], properties);
+                pixels = _lineTool.BresenhamLine(pixels, drawingPoints[i], drawingPoints[i + 1], properties.Color);
             }
             return pixels;
         }

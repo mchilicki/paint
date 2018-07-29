@@ -1,10 +1,13 @@
 ﻿using Chilicki.Paint.Domain.Enums;
 using Chilicki.Paint.Domain.Services.PaintingTools;
+using System;
 
 namespace Chilicki.Paint.Domain.Factories
 {
     public class ToolFactory
     {
+        private readonly string UndefinedTool = "ToolFactory: No such tool";
+
         public IPainterTool Create(ToolType toolType)
         {
             switch (toolType)
@@ -22,7 +25,7 @@ namespace Chilicki.Paint.Domain.Factories
                 case ToolType.Fill:
                     return new FillTool();
                 default:
-                    return new EmptyTool();
+                    throw new ArgumentException(UndefinedTool);
             }
         }
     }

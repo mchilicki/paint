@@ -10,15 +10,16 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
     {
         public PixelCollection Draw(PixelCollection pixels, IList<Point> drawingPoints, DrawingItemProperties properties)
         {
-            return Draw(pixels, drawingPoints.First(), properties);
+            var fillPixel = pixels.GetPixel(drawingPoints.First());
+            FloodFill(pixels, fillPixel, fillPixel.Color, properties.Color);
+            return pixels;
         }
 
-        public PixelCollection Draw(PixelCollection pixels, Point fillPoint, DrawingItemProperties properties)
+        public PixelCollection FloodFill(PixelCollection pixels, Pixel fillPixel, Color targetColor, Color replacementColor)
         {
-            var fillPixel = pixels.GetPixel(fillPoint);
-            var targetColor = fillPixel.Color;
-            var replacementColor = properties.Color;            
             if (targetColor.Equals(replacementColor))
+                return pixels;
+            if (!fillPixel.Color.Equals(targetColor))
                 return pixels;
             var pixelQueue = new Queue<Pixel>();
             pixels.SetPixel(fillPixel, replacementColor);
@@ -27,19 +28,19 @@ namespace Chilicki.Paint.Domain.Services.PaintingTools
             while (pixelQueue.Count > 0)
             {
                 currentPixel = pixelQueue.Dequeue();
-                var northPixel = pixels.GetPixelOrNull(currentPixel.Row - 1, currentPixel.Column);
-                var southPixel = pixels.GetPixelOrNull(currentPixel.Row + 1, currentPixel.Column);
-                var eastPixel = pixels.GetPixelOrNull(currentPixel.Row, currentPixel.Column + 1);
-                var westPixel = pixels.GetPixelOrNull(currentPixel.Row, currentPixel.Column - 1);
-                TryToColorPixel(ref pixels, ref pixelQueue, northPixel, targetColor, replacementColor);
-                TryToColorPixel(ref pixels, ref pixelQueue, southPixel, targetColor, replacementColor);
-                TryToColorPixel(ref pixels, ref pixelQueue, eastPixel, targetColor, replacementColor);
-                TryToColorPixel(ref pixels, ref pixelQueue, westPixel, targetColor, replacementColor);
+                var northPixel = pixels.GetPixelOrNull(currentPixel.Column, currentPixel.Row - 1);
+                var southPixel = pixels.GetPixelOrNull(currentPixel.Column, currentPixel.Row + 1);
+                var eastPixel = pixels.GetPixelOrNull(currentPixel.Column + 1, currentPixel.Row);
+                var westPixel = pixels.GetPixelOrNull(currentPixel.Column - 1, currentPixel.Row);
+                TryToColorPixel(pixels, pixelQueue, northPixel, targetColor, replacementColor);
+                TryToColorPixel(pixels, pixelQueue, southPixel, targetColor, replacementColor);
+                TryToColorPixel(pixels, pixelQueue, eastPixel, targetColor, replacementColor);
+                TryToColorPixel(pixels, pixelQueue, westPixel, targetColor, replacementColor);
             }
             return pixels;
         }
 
-        private void TryToColorPixel(ref PixelCollection pixels, ref Queue<Pixel> pixelQueue, Pixel currentPixel,
+        private void TryToColorPixel(PixelCollection pixels, Queue<Pixel> pixelQueue, Pixel currentPixel,
             Color targetColor, Color replacementColor)
         {
             if (currentPixel != null && targetColor.Equals(currentPixel.Color))

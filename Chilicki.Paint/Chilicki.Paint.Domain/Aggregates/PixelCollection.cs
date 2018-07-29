@@ -82,20 +82,25 @@ namespace Chilicki.Paint.Domain.Aggregates
         public void SetPixel(int column, int row, Color colour)
         {
             var pixel = GetPixel(column, row);
-            pixel.Alpha = colour.A;
-            pixel.Blue = colour.B;
-            pixel.Green = colour.G;
-            pixel.Red = colour.R;
+            if (pixel != null)
+            {
+                pixel.Alpha = colour.A;
+                pixel.Blue = colour.B;
+                pixel.Green = colour.G;
+                pixel.Red = colour.R;
+            }            
         }
 
         public void SetPixel(Point point, Color colour)
         {
-            SetPixel((int)point.X, (int)point.Y, colour);
+            if (point != null)
+                SetPixel((int)point.X, (int)point.Y, colour);
         }
 
         public void SetPixel(Pixel pixel, Color colour)
         {
-            SetPixel(pixel.Column, pixel.Row, colour);
+            if (pixel != null)
+                SetPixel(pixel.Column, pixel.Row, colour);
         }
     }
 }
