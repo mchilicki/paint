@@ -1,6 +1,5 @@
 ﻿using Chilicki.Paint.Application.Managers;
 using Chilicki.Paint.Domain.Factories;
-using Chilicki.Paint.Domain.Services.PaintingTools;
 using Chilicki.Paint.UserInterface.ViewModel;
 using Ninject.Modules;
 

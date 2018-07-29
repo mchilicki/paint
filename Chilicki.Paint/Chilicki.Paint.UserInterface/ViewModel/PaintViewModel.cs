@@ -1,14 +1,13 @@
 ﻿using Chilicki.Paint.Application.Managers;
 using Chilicki.Paint.Domain.ValueObjects;
-using Chilicki.Paint.Domain.ValueObjects.DrawingItems;
 using Chilicki.Paint.UserInterface.ViewModel.Base;
 using Chilicki.Paint.UserInterface.ViewModel.Commands;
-using Chilicki.Paint.Common.Extensions.Lists;
-using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Chilicki.Paint.Domain.Enums;
 using System.Collections.Generic;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System;
 
 namespace Chilicki.Paint.UserInterface.ViewModel
 {
@@ -18,6 +17,11 @@ namespace Chilicki.Paint.UserInterface.ViewModel
         private ToolType _currentToolType;
         private IList<Point> _drawingPoints;
 
+        private static readonly string DefaultEmptyFileUri = 
+            @"pack://application:,,,/Chilicki.Paint.UserInterface;component/Pictures/emptyFile.bmp";
+        private static readonly int DefaultBitmapWidth = 400;
+        private static readonly int DefaultBitmapHeight = 400;
+
         private bool _isUserDrawing = false;
 
         public PaintViewModel(PaintManager paintManager)
@@ -26,15 +30,37 @@ namespace Chilicki.Paint.UserInterface.ViewModel
             _currentToolType = ToolType.Pencil;
         }
 
-        private ObservableCollection<DrawingItem> _drawingItems 
-            = new ObservableCollection<DrawingItem>();
-        public ObservableCollection<DrawingItem> DrawingItems
+        private BitmapSource _currentBitmap 
+            = new WriteableBitmap(new BitmapImage(new Uri(DefaultEmptyFileUri, UriKind.Absolute)));
+        public BitmapSource CurrentBitmap
         {
-            get { return _drawingItems; }
+            get { return _currentBitmap; }
             set
             {
-                _drawingItems = value;
-                NotifyPropertyChanged(nameof(DrawingItems));
+                _currentBitmap = value;
+                NotifyPropertyChanged(nameof(CurrentBitmap));
+            }
+        }
+        
+        private int _currentBitmapWidth = DefaultBitmapWidth;
+        public int CurrentBitmapWidth
+        {
+            get { return _currentBitmapWidth; }
+            set
+            {
+                _currentBitmapWidth = value;
+                NotifyPropertyChanged(nameof(CurrentBitmapWidth));
+            }
+        }
+        
+        private int _currentBitmapHeight = DefaultBitmapHeight;
+        public int CurrentBitmapHeigth
+        {
+            get { return _currentBitmapHeight; }
+            set
+            {
+                _currentBitmapHeight = value;
+                NotifyPropertyChanged(nameof(CurrentBitmapHeigth));
             }
         }
 
@@ -57,17 +83,6 @@ namespace Chilicki.Paint.UserInterface.ViewModel
             {
                 _currentMousePositionY = value;
                 NotifyPropertyChanged(nameof(CurrentMousePositionY));
-            }
-        }
-
-        private double _currentThickness = 1;
-        public double CurrentThickness
-        {
-            get { return _currentThickness; }
-            set
-            {
-                _currentThickness = value;
-                NotifyPropertyChanged(nameof(CurrentThickness));
             }
         }
 
@@ -128,11 +143,10 @@ namespace Chilicki.Paint.UserInterface.ViewModel
                     {
                         if (_drawingPoints != null && _isUserDrawing)
                         {
-                            DrawingItemProperties properties = new DrawingItemProperties(
-                                _currentThickness + 1, new SolidColorBrush(CurrentColour));
+                            DrawingItemProperties properties = new DrawingItemProperties(CurrentColour);
                             _drawingPoints.Add(new Point(CurrentMousePositionX, CurrentMousePositionY));
-                            DrawingItems = _paintManager.Draw(_drawingItems.ToList(), _currentToolType,
-                                _drawingPoints, properties).ToObservableCollection();
+                            CurrentBitmap = _paintManager.Draw(CurrentBitmap, _currentToolType,
+                                _drawingPoints, properties);
                             _isUserDrawing = false;
                         }                        
                     });

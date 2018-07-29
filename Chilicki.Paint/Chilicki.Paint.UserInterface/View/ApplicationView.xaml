@@ -17,26 +17,24 @@
         Title="Paint by Marcin Chilicki"
         Width="900"
         MinWidth="900"
-        MaxWidth="900"
-        MaxHeight="600"
         Height="600"
         MinHeight="600">
     <Grid Name="MainGrid" Background="LightGray">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="4*" />
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
         <Grid Name="LeftMenuGrid" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*" />
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*" />
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*" />
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="4*" />
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
             <Button Content="Undo" Grid.Row="0" Command="{Binding Undo}" Style="{StaticResource ButtonStyle}"/>
             <RadioButton Content="Pencil" Grid.Row="1" IsChecked="True" Command="{Binding ChangeTool}" 
@@ -49,81 +47,24 @@
                           CommandParameter="{x:Static enums:ToolType.Rectangle}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
             <RadioButton Content="Rubber" Grid.Row="5" Command="{Binding ChangeTool}" 
                           CommandParameter="{x:Static enums:ToolType.Rubber}" Style="{StaticResource RadioAsToggleButtonStyle}"/>
-            <Label Content="Thickness" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
-            <ComboBox SelectedIndex="{Binding CurrentThickness}" Grid.Row="6" Style="{StaticResource ComboBoxStyle}" 
-                      Margin="108,11.2,15.4,6" Width="Auto">
-                <ComboBoxItem>1</ComboBoxItem>
-                <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem>3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
-                <ComboBoxItem>5</ComboBoxItem>
-                <ComboBoxItem>6</ComboBoxItem>
-                <ComboBoxItem>7</ComboBoxItem>
-                <ComboBoxItem>8</ComboBoxItem>
-            </ComboBox>
-            <Label Content="Colour" Grid.Row="7" Style="{StaticResource LabelStyle}"/>
-            <colorPicker:ColorPicker Grid.Row="7" SelectedColor="{Binding CurrentColour}" Height="30" Margin="108,9,14.4,9"/>
+            <Label Content="Colour" Grid.Row="6" Style="{StaticResource LabelStyle}"/>
+            <colorPicker:ColorPicker Grid.Row="6" SelectedColor="{Binding CurrentColour}" Height="30" Margin="108,9,14.4,9"/>
         </Grid>
         <Grid Name="RightCanvasGrid" Grid.Column="1">
-            <ItemsControl ItemsSource="{Binding DrawingItems}"                              >
-                <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type drawingItems:CircleItem}">
-                        <Ellipse Stroke="{Binding Brush}" 
-                                 Fill="Transparent" 
-                                 Width="{Binding Width}"
-                                 Height="{Binding Height}"
-                                 Margin="{Binding Margin}"
-                                 StrokeThickness="{Binding Thickness}"/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type drawingItems:RectangleItem}">
-                        <Rectangle Stroke="{Binding Brush}"  
-                                   Fill="Transparent"
-                                   Width="{Binding Width}"
-                                   Height="{Binding Height}"
-                                   Margin="{Binding Margin}"
-                                   StrokeThickness="{Binding Thickness}"/>
-                    </DataTemplate>
-                    <DataTemplate DataType="{x:Type drawingItems:LineItem}">
-                        <Line Stroke="{Binding Brush}" 
-                              Fill="Transparent"
-                              X1="{Binding StartPointX}" 
-                              Y1="{Binding StartPointY}"
-                              X2="{Binding EndPointX}" 
-                              Y2="{Binding EndPointY}"
-                              StrokeThickness="{Binding Thickness}"/>
-                    </DataTemplate>                    
-                    <DataTemplate DataType="{x:Type drawingItems:PathItem}">
-                        <Polyline Stroke="{Binding Brush}"  
-                                  Fill="Transparent"
-                                  StrokeThickness="{Binding Thickness}"
-                                  Points="{Binding Points}"/>
-                    </DataTemplate>
-                </ItemsControl.Resources>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <Canvas Background="White">
-                            <i:Interaction.Behaviors>
-                                <behaviours:MouseBehaviour MouseX="{Binding CurrentMousePositionX, Mode=OneWayToSource}" 
+            <Canvas Height="{Binding CurrentBitmapHeight}" Width="{Binding CurrentBitmapWidth}"
+                    HorizontalAlignment="Left">
+                <Image Source="{Binding CurrentBitmap}"/>
+                <i:Interaction.Behaviors>
+                    <behaviours:MouseBehaviour MouseX="{Binding CurrentMousePositionX, Mode=OneWayToSource}" 
                                                            MouseY="{Binding CurrentMousePositionY, Mode=OneWayToSource}" />
-                                <behaviours:EventToCommandBehavior Command="{Binding StartDrawing}" Event="MouseDown" 
+                    <behaviours:EventToCommandBehavior Command="{Binding StartDrawing}" Event="MouseDown" 
                                                                    PassArguments="False" />
-                                <behaviours:EventToCommandBehavior Command="{Binding EndDrawing}" Event="MouseUp" 
+                    <behaviours:EventToCommandBehavior Command="{Binding EndDrawing}" Event="MouseUp" 
                                                                    PassArguments="False" />
-                                <behaviours:EventToCommandBehavior Command="{Binding EndDrawing}" Event="MouseLeave" 
+                    <behaviours:EventToCommandBehavior Command="{Binding ContinueDrawing}" Event="MouseMove"
                                                                    PassArguments="False" />
-                                <behaviours:EventToCommandBehavior Command="{Binding ContinueDrawing}" Event="MouseMove"
-                                                                   PassArguments="False" />
-                            </i:Interaction.Behaviors>
-                        </Canvas>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemContainerStyle>
-                    <Style TargetType="ContentPresenter">
-                        <Setter Property="Canvas.Top" Value="{Binding Top}"/>
-                        <Setter Property="Canvas.Left" Value="{Binding Left}"/>
-                    </Style>
-                </ItemsControl.ItemContainerStyle>
-            </ItemsControl>
+                </i:Interaction.Behaviors>
+            </Canvas>
         </Grid>
     </Grid>
 </Window>
